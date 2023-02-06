@@ -12,7 +12,7 @@ TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.default()
 intents.message_content = True
 # 2
-bot = commands.Bot(intents=intents, command_prefix='!')
+bot = commands.Bot(intents=intents, command_prefix='/')
 
 
 @bot.event
