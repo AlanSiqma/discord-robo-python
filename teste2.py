@@ -11,6 +11,7 @@ TOKEN = os.getenv('TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
 # 2
 bot = commands.Bot(intents=intents, command_prefix='/')
 
@@ -22,6 +23,11 @@ async def on_ready():
 
 @bot.command(name='99', help='Responds with a random quote from Brooklyn 99')
 async def nine_nine(ctx):
+    ctx.typing()
+    for member in ctx.guild.members:
+        print("{},{}".format(member, member.id))
+
+    # await user.send("Your message goes here")
     brooklyn_99_quotes = [
         'I\'m the huaman form of the 💯 emoji.',
         'Bingpot!',
@@ -30,9 +36,9 @@ async def nine_nine(ctx):
             'no doubt no doubt no doubt no doubt.'
         ),
     ]
-
+    await ctx.author.send("Your message goes here")
     response = random.choice(brooklyn_99_quotes)
-    await ctx.send(response)
+    await ctx.reply(response)
 
 
 @bot.command(name='roll_dice', help='Simulates rolling dice.')
