@@ -46,6 +46,14 @@ async def private_message(ctx):
     await ctx.author.send("Mensagem em privado")
 
 
+@bot.command(name='add_objectives', help="Robo's reply in private")
+async def add_objectives(ctx, objectives):
+    for objective in objectives.split(','):
+        print(objective)
+    ctx.typing()
+    await ctx.reply("Mensagem em privado")
+
+
 @bot.command(name='roll_dice', help='Simulates rolling dice.')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     ctx.typing()
