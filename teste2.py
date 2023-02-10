@@ -45,8 +45,6 @@ async def private_message(ctx):
     ctx.typing()
     await ctx.author.send("Mensagem em privado")
 
-array = []
-
 
 @bot.command(name='roll_dice', help='Simulates rolling dice.')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
@@ -56,6 +54,8 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
         for _ in range(number_of_dice)
     ]
     await ctx.reply(', '.join(dice))
+
+array = []
 
 
 @bot.command(name='add_objectives', help="Robo's reply in private")
@@ -72,5 +72,11 @@ async def list_objectives(ctx):
     ctx.typing()
     await ctx.reply(', '.join(array))
 
+
+@bot.command(name='remove_objective', help="Robo's reply in private")
+async def remove_objective(ctx, item):
+    ctx.typing()
+    array.remove(item)
+    await ctx.reply("Item removido com sucesso")
 
 bot.run(TOKEN)
