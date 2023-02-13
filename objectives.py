@@ -1,5 +1,6 @@
 # bot.py
 import os
+import json
 import random
 from dotenv import load_dotenv
 import discord
@@ -21,14 +22,16 @@ async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
 array = []
+arrayObject = []
 
 
 @bot.command(name='add_objectives', help="Robo's reply in private")
 async def add_objectives(ctx, objectives):
+    ctx.typing()
+    print(ctx.author.id)
     for objective in objectives.split(','):
         array.append(objective)
 
-    ctx.typing()
     await ctx.reply("Objetivos adicionados")
 
 
