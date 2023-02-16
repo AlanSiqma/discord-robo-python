@@ -27,19 +27,21 @@ array = []
 @bot.command(name='add_objectives', help="Robo's reply in private")
 async def add_objectives(ctx, objectives):
     ctx.typing()
-    print(ctx.author.id)
+
     for objective in objectives.split(','):
         array.append(objective)
 
     add_objective_json(ctx.author.id, array)
-    array.append(objective)
+
     await ctx.reply("Objetivos adicionados")
 
 
 @bot.command(name='list_objectives', help="Robo's reply in private")
 async def list_objectives(ctx):
     ctx.typing()
-    await ctx.reply(', '.join(array))
+    data = get_single_objective(ctx.author.id)
+    print(data)
+    await ctx.reply(', '.join(data['array']))
 
 
 @bot.command(name='remove_objective', help="Robo's reply in private")
@@ -65,12 +67,33 @@ def store_json_data(data):
 
 
 def add_objective_json(id, array):
+
     current_data = {
         "id": id,
         "array": array
     }
     data = get_json_data()
-    store_json_data(current_data)
+    data.update(current_data)
+    store_json_data(data)
+
+
+def get_single_objective(id):
+    data = get_json_data()
+    print(data)
+    if (id in data):
+        return data[id]
+    return None
+
+
+def update_single_objective(id, array):
+    data = get_json_data()
+    if (id in data):
+        current_data = {
+            "id": id,
+            "array": array
+        }
+    data[id] = current_data
+    store_json_data(data)
 
 
 bot.run(TOKEN)
