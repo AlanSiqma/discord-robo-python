@@ -39,8 +39,9 @@ async def add_objectives(ctx, objectives):
 @bot.command(name='list_objectives', help="Robo's reply in private")
 async def list_objectives(ctx):
     ctx.typing()
+    
     data = get_single_objective(ctx.author.id)
-    print(data)
+   
     await ctx.reply(', '.join(data['array']))
 
 
@@ -79,10 +80,13 @@ def add_objective_json(id, array):
 
 def get_single_objective(id):
     data = get_json_data()
-    print(data)
-    if (id in data):
-        return data[id]
-    return None
+    result = None
+
+    for item in data['array']:
+        if item['id'] == id:
+            result = item
+
+    return result
 
 
 def update_single_objective(id, array):
