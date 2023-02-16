@@ -39,9 +39,10 @@ async def add_objectives(ctx, objectives):
 @bot.command(name='list_objectives', help="Robo's reply in private")
 async def list_objectives(ctx):
     ctx.typing()
-    
+
     data = get_single_objective(ctx.author.id)
-   
+    print(data)
+
     await ctx.reply(', '.join(data['array']))
 
 
@@ -68,36 +69,27 @@ def store_json_data(data):
 
 
 def add_objective_json(id, array):
-
-    current_data = {
-        "id": id,
-        "array": array
-    }
+    text = str(id)
     data = get_json_data()
-    data.update(current_data)
+    objective = get_single_objective(id)
+    if objective == None:
+        current_data = {
+            "id": id,
+            "array": array
+        }
+    else:
+        for item in array:
+            objective['array'].append(item)
+        current_data = objective
+
+    data[text] = current_data
     store_json_data(data)
 
 
 def get_single_objective(id):
     data = get_json_data()
-    result = None
-
-    for item in data['array']:
-        if item['id'] == id:
-            result = item
-
-    return result
-
-
-def update_single_objective(id, array):
-    data = get_json_data()
-    if (id in data):
-        current_data = {
-            "id": id,
-            "array": array
-        }
-    data[id] = current_data
-    store_json_data(data)
+    text = str(id)
+    return data[text]
 
 
 bot.run(TOKEN)
