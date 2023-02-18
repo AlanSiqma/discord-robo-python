@@ -40,7 +40,6 @@ async def list_objectives(ctx):
     ctx.typing()
 
     data = objective_repository.get_single_objective(ctx.author.id)
-    print(data)
 
     await ctx.reply(', '.join(data['array']))
 
@@ -48,7 +47,9 @@ async def list_objectives(ctx):
 @bot.command(name='remove_objective', help="Robo's reply in private")
 async def remove_objective(ctx, item):
     ctx.typing()
-    array.remove(item)
+
+    objective_repository.remove_objective(ctx.author.id, item)
+
     await ctx.reply("Item removido com sucesso")
 
 
