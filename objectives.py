@@ -23,7 +23,7 @@ async def on_ready():
 array = []
 
 
-@bot.command(name='add_objectives', help="Robo's reply in private")
+@bot.command(name='add_objectives', help="Adicionando um novo objetivo para o usuario")
 async def add_objectives(ctx, objectives):
     ctx.typing()
 
@@ -35,7 +35,7 @@ async def add_objectives(ctx, objectives):
     await ctx.reply("Objetivos adicionados")
 
 
-@bot.command(name='list_objectives', help="Robo's reply in private")
+@bot.command(name='list_objectives', help="Listando os objetivos do usuario")
 async def list_objectives(ctx):
     ctx.typing()
 
@@ -44,7 +44,7 @@ async def list_objectives(ctx):
     await ctx.reply(', '.join(data['array']))
 
 
-@bot.command(name='remove_objective', help="Robo's reply in private")
+@bot.command(name='remove_objective', help="Deletendo um objetivo do usuario")
 async def remove_objective(ctx, item):
     ctx.typing()
 
