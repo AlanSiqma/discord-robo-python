@@ -18,7 +18,7 @@ bot = commands.Bot(intents=intents, command_prefix='/')
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user.name} has connected to Discord!')
+    print(f'{bot.user.name} o robio está conectado no Discord!')
 
 array = []
 
