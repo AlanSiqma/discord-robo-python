@@ -18,7 +18,7 @@ bot = commands.Bot(intents=intents, command_prefix='/')
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user.name} o robio está conectado no Discord!')
+    print(f'{bot.user.name} o robo está conectado no Discord!')
 
 array = []
 
@@ -44,7 +44,7 @@ async def list_objectives(ctx):
     await ctx.reply(', '.join(data['array']))
 
 
-@bot.command(name='remove_objective', help="Deletendo um objetivo do usuario")
+@bot.command(name='remove_objective', help="Deletando um objetivo do usuario")
 async def remove_objective(ctx, item):
     ctx.typing()
 
