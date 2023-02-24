@@ -20,11 +20,10 @@ bot = commands.Bot(intents=intents, command_prefix='/')
 async def on_ready():
     print(f'{bot.user.name} o robo está conectado no Discord!')
 
-array = []
-
 
 @bot.command(name='add_objectives', help="Adicionando um novo objetivo para o usuario")
 async def add_objectives(ctx, objectives):
+    array = []
     ctx.typing()
 
     for objective in objectives.split(','):
