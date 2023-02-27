@@ -1,32 +1,55 @@
-import discord
-from dotenv import load_dotenv
+
 import os
+from dto import objective_repository
+from dotenv import load_dotenv
+import discord
+
+from discord.ext import commands
 
 load_dotenv()
-
-
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print(f'Logged on as {self.user}!')
-
-    async def on_message(self, message):
-        print(f'Message from {message.author}: {message.content}')
-        if message.content == "?regras":
-            await message.channel.send(f'as regras do servior são:{os.linesep}1- tem que ser engenheiro{os.linesep}2- so pode ser engenheiro')
-        elif message.content == "?nivel":
-            await message.author.send(f'Nível 1')
-
-    async def on_member_join(self, member):
-        guild = member.guild
-        if guild.system_channel is not None:
-            mensagem = f'{member.mention} acabou de entrar no {guild.name}'
-            await guild.system_channel.send(mensagem)
-
+TOKEN = os.getenv('TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
-client = MyClient(intents=intents)
+bot = commands.Bot(intents=intents, command_prefix='/')
 
-client.run(os.getenv('TOKEN'))
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user.name} o robo está conectado no Discord!')
+
+
+@bot.command(name='add_objectives', help="Adicionando um novo objetivo para o usuario")
+async def add_objectives(ctx, objectives):
+    array = []
+    ctx.typing()
+
+    for objective in objectives.split(','):
+        array.append(objective)
+
+    objective_repository.add_objective_json(ctx.author.id, array)
+
+    await ctx.reply("Objetivos adicionados")
+
+
+@bot.command(name='list_objectives', help="Listando os objetivos do usuario")
+async def list_objectives(ctx):
+    ctx.typing()
+
+    data = objective_repository.get_single_objective(ctx.author.id)
+
+    await ctx.reply(', '.join(data['array']))
+
+
+@bot.command(name='remove_objective', help="Deletando um objetivo do usuario")
+async def remove_objective(ctx, item):
+    ctx.typing()
+
+    objective_repository.remove_objective(ctx.author.id, item)
+
+    await ctx.reply("Item removido com sucesso")
+
+
+bot.run(TOKEN)
