@@ -24,8 +24,6 @@ async def on_ready():
 @bot.command(name='99', help='Responds with a random quote from Brooklyn 99')
 async def nine_nine(ctx):
     ctx.typing()
-    # for member in ctx.guild.members:
-    #     print("{},{}".format(member, member.id))
 
     brooklyn_99_quotes = [
         'I\'m the huaman form of the 💯 emoji.',
