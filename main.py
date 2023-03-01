@@ -1,6 +1,6 @@
 
 import os
-from dto import objective_repository
+from DAO import objective_repository
 from dotenv import load_dotenv
 import discord
 
