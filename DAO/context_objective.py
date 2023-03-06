@@ -1,6 +1,6 @@
 
 import json
-FILEPATH = 'teste.json'
+FILEPATH = 'data.json'
 
 
 def get_json_data():
