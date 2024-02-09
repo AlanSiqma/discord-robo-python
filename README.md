@@ -1,9 +1,6 @@
-# Robo Discord Python 
-## O que é ?
-Os bots do Discord são uma espécie de usuários robôs, ou seja, são usuários não humanos que realizam atividades programadas
+# Bot Discord em Python 🤖🐍
+## O que é?
+Os bots do Discord são como usuários robóticos, ou seja, são entidades não humanas programadas para executar tarefas específicas.
 
-## E esse bot o que faz? 
-Responsavel por adicionar os objetivos da pessoa em um arquivo
-
-## Configurações
-Em andamento...
+## O que este bot faz?
+Este bot é responsável por gerenciar e adicionar os objetivos dos usuários a um arquivo designado.
